@@ -4,9 +4,13 @@ from flask import current_app as app
 from urlextract import URLExtract
 
 from model import phantomjscloud
-from llama_index import GPTSimpleVectorIndex
+from llama_index import GPTSimpleVectorIndex, LLMPredictor
+from langchain.chat_models import ChatOpenAI
 
 extractor = URLExtract()
+
+llm_predictor = LLMPredictor(llm=ChatOpenAI(
+    temperature=0.75, model_name="gpt-3.5-turbo"))
 
 
 class ChatGPT(Resource):
@@ -33,7 +37,7 @@ class ChatGPT(Resource):
             index = GPTSimpleVectorIndex.from_documents(documents)
             app.logger.info(index)
 
-            response = index.query(prompt)
+            response = index.query(prompt, llm_predictor=llm_predictor)
 
             app.logger.info(response.response)
 
