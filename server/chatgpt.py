@@ -12,7 +12,7 @@ extractor = URLExtract()
 llm_predictor = LLMPredictor(llm=ChatOpenAI(
     temperature=0.75, model_name="gpt-3.5-turbo"))
 
-service_context = ServiceContext.from_defaults(llm_predictor=llm_predictor)
+
 
 
 class ChatGPT(Resource):
@@ -35,6 +35,8 @@ class ChatGPT(Resource):
             for _, url in enumerate(urls):
                 prompt = prompt.replace(url, "")
             documents = phantomjscloud.getDocumentsByUrls(urls)
+
+            service_context = ServiceContext.from_defaults(llm_predictor=llm_predictor)
 
             index = GPTSimpleVectorIndex.from_documents(documents, service_context=service_context)
             app.logger.info(index)
