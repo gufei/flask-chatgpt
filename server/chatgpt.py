@@ -33,7 +33,11 @@ class ChatGPT(Resource):
             index = GPTSimpleVectorIndex.from_documents(documents)
             app.logger.info(index)
 
-            answer = index.query(prompt)
+            response = index.query(prompt)
+
+            app.logger.info(response)
+
+            answer = "ok"
 
         else:
             answer = "no url in prompt!"
