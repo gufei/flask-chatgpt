@@ -35,9 +35,9 @@ class ChatGPT(Resource):
 
             response = index.query(prompt)
 
-            app.logger.info(response)
+            app.logger.info(response.response)
 
-            answer = "ok"
+            answer = response.response
 
         else:
             answer = "no url in prompt!"
