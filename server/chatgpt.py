@@ -10,9 +10,7 @@ from langchain.chat_models import ChatOpenAI
 extractor = URLExtract()
 
 llm_predictor = LLMPredictor(llm=ChatOpenAI(
-    temperature=0.75, model_name="gpt-3.5-turbo"))
-
-
+    temperature=0.75, model_name="gpt-3.5-turbo", max_tokens=4096))
 
 
 class ChatGPT(Resource):
