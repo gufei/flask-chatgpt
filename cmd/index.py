@@ -9,7 +9,7 @@ indexCmdBp = Blueprint('index', __name__)
 
 llm_predictor = LLMPredictor(llm=ChatOpenAI(temperature=0.75, model_name="gpt-3.5-turbo"))
 
-prompt_helper = PromptHelper(max_input_size=4096, num_output=1000, max_chunk_overlap=20)
+prompt_helper = PromptHelper(max_input_size=4096, num_output=3000, max_chunk_overlap=20)
 
 service_context = ServiceContext.from_defaults(llm_predictor=llm_predictor, prompt_helper=prompt_helper)
 
