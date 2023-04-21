@@ -3,12 +3,12 @@ from flask import request
 from flask import current_app as app
 from llama_index import GPTSimpleVectorIndex, LLMPredictor, RssReader, PromptHelper, ServiceContext
 
-from cmd.index import xueqiu_index_path,service_context
+from cmd.index import xueqiu_index_path, service_context
 
 from llama_index.prompts.prompts import QuestionAnswerPrompt
 
 QUESTION_ANSWER_PROMPT_TMPL_CN = (
-    "你是一个经济学专家，对二级市场投资非常精通，以下是雪球热贴和话题： \n"
+    "你是一个经济学专家，对二级市场投资非常精通，以下是相关财经内容： \n"
     "---------------------\n"
     "{context_str}"
     "\n---------------------\n"
@@ -25,7 +25,4 @@ class XueQiu(Resource):
         answer = index.query(prompt, service_context=service_context,
                              text_qa_template=QuestionAnswerPrompt(QUESTION_ANSWER_PROMPT_TMPL_CN))
 
-
-
         return {'code': 200, 'msg': 'ok', 'data': answer.response}
-
