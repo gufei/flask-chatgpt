@@ -33,9 +33,7 @@ def xueqiu():
 
     if xueqiu_index_path.is_file():
         index = GPTSimpleVectorIndex.load_from_disk(xueqiu_index_path, service_context=service_context)
-        for node in nodes:
-            if index.docstore.document_exists(node.get_doc_id()):
-                index.insert(node)
+        index.insert_nodes(nodes)
     else:
         index = GPTSimpleVectorIndex(nodes, service_context=service_context)
 
