@@ -23,8 +23,9 @@ class XueQiu(Resource):
         body = request.get_json()
         app.logger.info(body['prompt'])
         prompt = body['prompt']
-
+        app.logger.info("start query")
         answer = xueqiuIndex.query(prompt, service_context=service_context,
                                    text_qa_template=QuestionAnswerPrompt(QUESTION_ANSWER_PROMPT_TMPL_CN))
+        app.logger.info("end query")
 
         return {'code': 200, 'msg': 'ok', 'data': answer.response}
