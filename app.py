@@ -4,10 +4,11 @@ from flask_restful import Api
 
 from server.chatgpt import ChatGPT
 from server.xueqiu import XueQiu
+from server.search import Search
 
 from logging.config import dictConfig
 
-from cmd import index as cmd_index
+from cmd import index as cmd_index,test as cmd_test
 
 dictConfig({
     'version': 1,
@@ -30,9 +31,15 @@ api = Api(app)
 
 api.add_resource(ChatGPT, '/chatgpt')
 api.add_resource(XueQiu, '/openai/xueqiu')
+api.add_resource(Search, '/search')
 
 
 app.register_blueprint(cmd_index.indexCmdBp)
+app.register_blueprint(cmd_test.cmdBp)
+
+
+
+
 
 if __name__ == '__main__':
     app.run(debug=True)
