@@ -8,7 +8,7 @@ from server.search import Search
 
 from logging.config import dictConfig
 
-from cmd import index as cmd_index,test as cmd_test
+from cmd import index as cmd_index
 
 dictConfig({
     'version': 1,
@@ -35,7 +35,7 @@ api.add_resource(Search, '/search')
 
 
 app.register_blueprint(cmd_index.indexCmdBp)
-app.register_blueprint(cmd_test.cmdBp)
+# app.register_blueprint(cmd_test.cmdBp)
 
 
 
