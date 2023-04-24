@@ -10,7 +10,7 @@ from langchain.agents import initialize_agent
 
 search = GoogleSerperAPIWrapper(gl="cn", hl="zh-cn")
 
-llm = ChatOpenAI(model_name="gpt-3.5-turbo", temperature=0.75, request_timeout=600, max_tokens=4000)
+llm = ChatOpenAI(model_name="gpt-3.5-turbo", temperature=0.75, request_timeout=600, max_tokens=3000)
 
 llm_math_chain = LLMMathChain(llm=llm, verbose=False)
 
