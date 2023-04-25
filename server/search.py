@@ -7,6 +7,7 @@ from langchain import LLMMathChain
 from langchain.agents import AgentType, Tool
 from langchain.memory import ConversationBufferMemory
 from langchain.agents import initialize_agent
+from openai.error import InvalidRequestError
 
 search = GoogleSerperAPIWrapper(gl="cn", hl="zh-cn")
 
@@ -39,7 +40,10 @@ class Search(Resource):
         body = request.get_json()
         app.logger.info(body['prompt'])
         prompt = body['prompt']
-
-        res = agent.run(prompt)
+        try:
+            res = agent.run(prompt)
+        except InvalidRequestError:
+            agent.memory.clear()
+            res = agent.run(prompt)
 
         return {'code': 200, 'msg': 'ok', 'data': res}
